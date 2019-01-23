@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Lambda Calculus</title>
+    <style>
+      body {
+        margin: 40px auto;
+        max-width: 650px;
+        line-height: 1.6;
+        font-size: 18px;
+        padding: 0 10px;
+      }
+      code {
+        color: #35979E;
+        font-family: inherit;
+        white-space: nowrap;
+      }
+      code.incorrect {
+        color: #ED4337;
+      }
+      .note {
+        font-size: small;
+      }
+      .note:before {
+        content: '*';
+        display: inline-block;
+      }
+      table {
+        margin-top: 1em;
+        margin-left: 1em;
+        border-collapse: collapse;
+      }
+      thead {
+        border-bottom: solid 1px black;
+      }
+      td, th {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+      }
+      .equations {
+        list-style-type: none;
+      }
+      .equations > li {
+        position: relative;
+      }
+      .equations > li:before {
+        content: "=";
+      }
+      .equations > li:first-child:before {
+        visibility: hidden;
+      }
+      .left-8 {
+        position: absolute;
+        left: 8em;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      <strong>Lambda calculus</strong>* is a system for defining functions that
+      lies at the heart of Haskell.
+    </p>
+
+    <p class="note">
+      There are various flavors of λ-calculus based on the same ideas. We
+      talk about a specific one: simply typed lambda calculus extended
+      with primitive functions.
+    </p>
+
+    <p>
+      Let us first introduce primitive (built-in) <em>types</em> and <em>values</em>:
+      <table>
+        <thead>
+          <tr>
+            <td>Type</td>
+            <td>Description</td>
+            <td>Values</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>Integer</code></td>
+            <td>Integer numbers</td>
+            <td><code>42</code>, <code>-666</code>, <code>0</code>, <code>17</code>, ...</td>
+          </tr>
+          <tr>
+            <td><code>String</code></td>
+            <td>Sequences of symbols</td>
+            <td><code>"time"</code>, <code>"cheese"</code>, <code>"world"</code>, ...</td>
+          </tr>
+          <tr>
+            <td><code>Bool</code></td>
+            <td>Logical values</td>
+            <td><code>True</code>, <code>False</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+
+    <p>
+      We write the relation between a value and its type as a double colon:
+      <ul>
+        <li>
+          <code>-3 :: Integer</code>
+        </li>
+        <li>
+          <code>"work" :: String</code>
+        </li>
+        <li>
+          <code>True :: Bool</code>
+        </li>
+        <li>
+          <code class="incorrect">"19" :: Integer</code> (incorrect, quotation marks indicate a string)
+        </li>
+        <li>
+          <code class="incorrect">True :: String</code> (incorrect, a logical value is not a sequence of symbols)
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      It is possible to have other primitive types, or none at all. We pick
+      numbers, strings, and booleans as they are familiar and allow for good
+      examples.
+    </p>
+
+    <p>
+      Now let us introduce a couple of primitive (built-in) functions:
+      <table>
+        <thead>
+          <tr>
+            <td>Function</td>
+            <td>Description</td>
+            <td>Type</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>succ</code></td>
+            <td>Increment a number</td>
+            <td><code>Integer → Integer</td>
+          </tr>
+          <tr>
+            <td><code>even</code></td>
+            <td>Check if a number is even</td>
+            <td><code>Integer → Bool</code></td>
+          </tr>
+          <tr>
+            <td><code>length</code></td>
+            <td>Count symbols in a string</td>
+            <td><code>String → Integer</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </p>
+
+    <p>
+      We write the type of a function from input values of type <code>A</code>
+      to output values of type <code>B</code> as an arrow, <code>A → B</code>.
+    </p>
+
+    <p>
+      <em>Function application</em> is denoted by a space. A function may only
+      be applied to a value of the matching input type:
+      <ul>
+        <li>
+          <code>succ 5</code> (apply the <code>succ</code> function to the number <code>5</code>)
+        </li>
+        <li>
+          <code>even -7</code> (apply the <code>even</code> function to the number <code>-7</code>)
+        </li>
+        <li>
+          <code>length "small"</code> (apply the <code>length</code> function to the string <code>"small"</code>)
+        </li>
+        <li>
+          <code class="incorrect">length 8</code> (incorrect, <code>length</code> expects a <code>String</code>, but <code>8 :: Integer</code>)
+        </li>
+        <li>
+          <code class="incorrect">succ True</code> (incorrect, <code>succ</code> expects an <code>Integer</code>, but <code>True :: Bool</code>)
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      Evaluation of a primitive function is called <em>δ-reduction</em> (delta reduction):
+      <ul>
+        <li>
+          <code>succ 5</code> = <code>6</code>
+        </li>
+        <li>
+          <code>even -7</code> = <code>False</code>
+        </li>
+        <li>
+          <code>length "small"</code> = <code>5</code>
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      We may also nest function applications, using parentheses for grouping:
+      <ul class="equations">
+        <li>
+          <code>even (succ (length "thing"))</code>
+        </li>
+        <li>
+          <code>even (succ 5)</code><span class="left-8">δ-reduction of <code>length</code></span>
+        </li>
+        <li>
+          <code>even 6</code>&emsp;<span class="left-8">δ-reduction of <code>succ</code></span>
+        </li>
+        <li>
+          <code>True</code>&emsp;<span class="left-8">δ-reduction of <code>even</code></span>
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      The type of a term is the same as the type of the value to which it reduces:
+      <ul>
+        <li>
+          <code>even (succ (length "thing")) :: Bool</code> (because <code>True :: Bool</code>)
+        </li>
+        <li>
+          <code>length "thing" :: Integer</code> (because <code>5 :: Integer</code>)
+        </li>
+      </ul>
+    </p>
+
+    <p>
+      This result type is also reflected in the type of every function. For
+      example, we know that <code>length s :: Integer</code> for any <code>s ::
+      String</code> because <code>length :: String → Integer</code>.
+    </p>
+
+    <p>
+      We also know that <code class="incorrect">succ (even n)</code> is
+      incorrect without evaluating it. The result of <code>even</code> is
+      inevitably a <code>Bool</code>, while <code>succ</code> expects an
+      <code>Integer</code> as input.
+    </p>
+
+    <big>This draft is unfinished.<big>
+
+  </body>
+</html>
