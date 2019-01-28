@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haskell Style Guide</title>
+  </head>
+  <body>
+<pre>module StyleGuide.Haskell.Vlad
+  (
+    -- * Whitespace management
+    LineLength(..),
+    maxLineLength,
+    Indentation(..),
+    preferredIndentation,
+    Alignment(..),
+    preferredAlignment,
+
+    -- * Naming
+    namingAdvice,
+
+    -- * Punctuation
+    Punctuation(..),
+    nicePunctuation,
+
+  ) where
+
+import Data.Text (Text)
+
+newtype LineLength = LineLength Natural
+  deriving newtype (Eq, Ord)
+  deriving stock Show
+
+maxLineLength =
+  -- Comfortable reading with two or three vertical splits.
+  LineLength 80
+
+data Indentation =
+  IndentationTabs |
+  IndentationSpaces Natural
+  deriving stock (Eq, Ord, Show)
+
+preferredIndentation =
+  -- Compact code that is easy to fit into 80 characters.
+  -- See Note [Tabs for indentation].
+  IndentationSpaces 2
+
+{- Note [Tabs for indentation]
+
+The "tabs for indentation, spaces for alignment" crowd has got a point.
+However, in practice it is too easy to mess up: if a space character
+creeps into indentation, the code can look aligned when it is not.
+
+Besides, GHC has -Wtabs on by default.
+
+-}
+
+data Alignment =
+  AlignmentTabs |
+  AlignmentSpaces |
+  AlignmentNone
+  deriving stock (Eq, Ord, Show)
+
+preferredAlignment =
+  -- Alignment is the bane of diffs and merges!
+  AlignmentNone
+
+namingAdvice :: Text
+namingAdvice =
+  "Haskell lacks namespaces, therefore it is wise to prefix\
+  \ all constructor and field names with the name of the data type\
+  \ to avoid name clashes.\n\
+  \ For example, IndentationTabs vs AlignmentTabs."
+
+data Punctuation =
+  PunctuationLeading |
+  PunctuatingTrailing
+  deriving stock (Eq, Ord, Show)
+
+nicePunctuation ::
+  Punctuation -&gt;
+  Bool
+nicePunctuation =
+  \case
+    PunctuationTrailing -&gt; True
+    PunctuationLeading -&gt; False</pre>
+  </body>
+</html>
