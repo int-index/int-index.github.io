@@ -102,7 +102,7 @@ newtype <span class="ty">Identity a</span> = <span class="tm">Identity</span> <s
     <p>
       Using distinct names for type constructors and data constructors is not that difficult:
     </p>
-<code class="block">data <span class="ty">List a</span> = <span class="tm">[]</span> | <span class="ty">a</span> <span class="tm">:</span> <span class="ty">[a]</span>
+<code class="block">data <span class="ty">List a</span> = <span class="tm">[]</span> | <span class="ty">a</span> <span class="tm">:</span> <span class="ty">(List a)</span>
 data <span class="ty">Pair a b</span> = <span class="tm">(</span><span class="ty">a</span><span class="tm">,</span> <span class="ty">b</span><span class="tm">)</span>
 data <span class="ty">Unit</span> = <span class="tm">()</span>
 data <span class="ty">Proxy a</span> = <span class="tm">P</span>
