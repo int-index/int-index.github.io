@@ -42,6 +42,9 @@
         padding-left: 0.5em;
         padding-right: 0.5em;
       }
+      .disclaimer {
+        font-size: larger;
+      }
     </style>
   </head>
   <body>
@@ -58,57 +61,57 @@
 
     <p>
       Let us first introduce primitive (built-in) <em>types</em> and <em>values</em>:
-      <table>
-        <thead>
-          <tr>
-            <td>Type
-            <td>Description
-            <td>Values
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>Integer</code>
-            <td>Integer numbers
-            <td><code>42</code>, <code>-666</code>, <code>0</code>, <code>17</code>, ...
-          <tr>
-            <td><code>String</code>
-            <td>Sequences of symbols
-            <td><code>"time"</code>, <code>"cheese"</code>, <code>"world"</code>, ...
-          <tr>
-            <td><code>Bool</code>
-            <td>Logical values
-            <td><code>True</code>, <code>False</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <thead>
+        <tr>
+          <td>Type
+          <td>Description
+          <td>Values
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Integer</code>
+          <td>Integer numbers
+          <td><code>42</code>, <code>-666</code>, <code>0</code>, <code>17</code>, ...
+        <tr>
+          <td><code>String</code>
+          <td>Sequences of symbols
+          <td><code>"time"</code>, <code>"cheese"</code>, <code>"world"</code>, ...
+        <tr>
+          <td><code>Bool</code>
+          <td>Logical values
+          <td><code>True</code>, <code>False</code>
+      </tbody>
+    </table>
 
     <p>
       We write the relation between a value and its type as a double colon:
-      <table>
-        <tbody>
-          <tr>
-            <td>•
-            <td><code>-3 :: Integer</code>
-            <td>
-          <tr>
-            <td>•
-            <td><code>"work" :: String</code>
-            <td>
-          <tr>
-            <td>•
-            <td><code>True :: Bool</code>
-            <td>
-          <tr>
-            <td>•
-            <td><code class="incorrect">"19" :: Integer</code>
-            <td>incorrect, quotation marks indicate a string
-          <tr>
-            <td>•
-            <td><code class="incorrect">True :: String</code>
-            <td>incorrect, a logical value is not a sequence of symbols
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>•
+          <td><code>-3 :: Integer</code>
+          <td>
+        <tr>
+          <td>•
+          <td><code>"work" :: String</code>
+          <td>
+        <tr>
+          <td>•
+          <td><code>True :: Bool</code>
+          <td>
+        <tr>
+          <td>•
+          <td><code class="incorrect">"19" :: Integer</code>
+          <td>incorrect, quotation marks indicate a string
+        <tr>
+          <td>•
+          <td><code class="incorrect">True :: String</code>
+          <td>incorrect, a logical value is not a sequence of symbols
+      </tbody>
+    </table>
 
     <p>
       It is possible to have other primitive types, or none at all. We pick
@@ -118,33 +121,33 @@
 
     <p>
       Now let us introduce a couple of primitive (built-in) functions:
-      <table>
-        <thead>
-          <tr>
-            <td>Function
-            <td>Description
-            <td>Type
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>succ</code>
-            <td>Increment a number
-            <td><code>Integer → Integer
-          <tr>
-            <td><code>pred</code>
-            <td>Decrement a number
-            <td><code>Integer → Integer
-          <tr>
-            <td><code>even</code>
-            <td>Check if a number is even
-            <td><code>Integer → Bool</code>
-          <tr>
-            <td><code>length</code>
-            <td>Count symbols in a string
-            <td><code>String → Integer</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <thead>
+        <tr>
+          <td>Function
+          <td>Description
+          <td>Type
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>succ</code>
+          <td>Increment a number
+          <td><code>Integer → Integer</code>
+        <tr>
+          <td><code>pred</code>
+          <td>Decrement a number
+          <td><code>Integer → Integer</code>
+        <tr>
+          <td><code>even</code>
+          <td>Check if a number is even
+          <td><code>Integer → Bool</code>
+        <tr>
+          <td><code>length</code>
+          <td>Count symbols in a string
+          <td><code>String → Integer</code>
+      </tbody>
+    </table>
 
     <p>
       We write the type of a function from input values of type <code>A</code>
@@ -154,101 +157,101 @@
     <p>
       <em>Function application</em> is denoted by a space. A function may only
       be applied to a value of the matching input type:
-      <table>
-        <tbody>
-          <tr>
-            <td>•
-            <td><code>succ 5</code>
-            <td>apply the <code>succ</code> function to the number <code>5</code>
-          <tr>
-            <td>•
-            <td><code>even -7</code>
-            <td>apply the <code>even</code> function to the number <code>-7</code>
-          <tr>
-            <td>•
-            <td><code>length "small"</code>
-            <td>apply the <code>length</code> function to the string <code>"small"</code>
-          <tr>
-            <td>•
-            <td><code class="incorrect">length 8</code>
-            <td>incorrect, <code>length</code> expects a <code>String</code>, but <code>8 :: Integer</code>
-          <tr>
-            <td>•
-            <td><code class="incorrect">succ True</code>
-            <td>incorrect, <code>succ</code> expects an <code>Integer</code>, but <code>True :: Bool</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>•
+          <td><code>succ 5</code>
+          <td>apply the <code>succ</code> function to the number <code>5</code>
+        <tr>
+          <td>•
+          <td><code>even -7</code>
+          <td>apply the <code>even</code> function to the number <code>-7</code>
+        <tr>
+          <td>•
+          <td><code>length "small"</code>
+          <td>apply the <code>length</code> function to the string <code>"small"</code>
+        <tr>
+          <td>•
+          <td><code class="incorrect">length 8</code>
+          <td>incorrect, <code>length</code> expects a <code>String</code>, but <code>8 :: Integer</code>
+        <tr>
+          <td>•
+          <td><code class="incorrect">succ True</code>
+          <td>incorrect, <code>succ</code> expects an <code>Integer</code>, but <code>True :: Bool</code>
+      </tbody>
+    </table>
 
     <p>
       Evaluation of a primitive function is called <em>δ-reduction</em> (delta reduction):
-      <table>
-        <tbody>
-          <tr>
-            <td>•
-            <td><code>succ 5</code>
-            <td>=
-            <td><code>6</code>
-          <tr>
-            <td>•
-            <td><code>pred 5</code>
-            <td>=
-            <td><code>4</code>
-          <tr>
-            <td>•
-            <td><code>even -7</code>
-            <td>=
-            <td><code>False</code>
-          <tr>
-            <td>•
-            <td><code>length "small"</code>
-            <td>=
-            <td><code>5</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>•
+          <td><code>succ 5</code>
+          <td>=
+          <td><code>6</code>
+        <tr>
+          <td>•
+          <td><code>pred 5</code>
+          <td>=
+          <td><code>4</code>
+        <tr>
+          <td>•
+          <td><code>even -7</code>
+          <td>=
+          <td><code>False</code>
+        <tr>
+          <td>•
+          <td><code>length "small"</code>
+          <td>=
+          <td><code>5</code>
+      </tbody>
+    </table>
 
     <p>
       We may also nest function applications, using parentheses for grouping:
-      <table>
-        <tbody>
-          <tr>
-            <td>
-            <td><code>even (succ (length "thing"))</code>
-            <td>
-          <tr>
-            <td>=
-            <td><code>even (succ 5)</code>
-            <td>δ-reduction of <code>length</code>
-          <tr>
-            <td>=
-            <td><code>even 6</code>
-            <td>δ-reduction of <code>succ</code>
-          <tr>
-            <td>=
-            <td><code>True</code>
-            <td>δ-reduction of <code>even</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+          <td><code>even (succ (length "thing"))</code>
+          <td>
+        <tr>
+          <td>=
+          <td><code>even (succ 5)</code>
+          <td>δ-reduction of <code>length</code>
+        <tr>
+          <td>=
+          <td><code>even 6</code>
+          <td>δ-reduction of <code>succ</code>
+        <tr>
+          <td>=
+          <td><code>True</code>
+          <td>δ-reduction of <code>even</code>
+      </tbody>
+    </table>
 
     <p>
       The type of a term is the same as the type of the value to which it reduces:
-      <table>
-        <tbody>
-          <tr>
-            <td>•
-            <td><code>even (succ (length "thing")) :: Bool</code>
-            <td>because
-            <td><code>True :: Bool</code>
-          <tr>
-            <td>•
-            <td><code>length "thing" :: Integer</code>
-            <td>because
-            <td><code>5 :: Integer</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>•
+          <td><code>even (succ (length "thing")) :: Bool</code>
+          <td>because
+          <td><code>True :: Bool</code>
+        <tr>
+          <td>•
+          <td><code>length "thing" :: Integer</code>
+          <td>because
+          <td><code>5 :: Integer</code>
+      </tbody>
+    </table>
 
     <p>
       This result type is also reflected in the type of every function. For
@@ -285,69 +288,69 @@
     <p>
       Like primitive functions, our functions can be applied with a space. We
       also parenthesize the function to mark the end of its body:
-      <table>
-        <tbody>
-          <tr>
-            <td><code>(\x → pred (pred x)) 13</code>
-            <td>apply the <code>\x → pred (pred x)</code> function to the number&nbsp;<code>13</code>
-          <tr>
-            <td><code>(\s → even (length s)) "hand"</code>
-            <td>apply the <code>\s → even (length s)</code> function to the string&nbsp;<code>"hand"</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td><code>(\x → pred (pred x)) 13</code>
+          <td>apply the <code>\x → pred (pred x)</code> function to the number&nbsp;<code>13</code>
+        <tr>
+          <td><code>(\s → even (length s)) "hand"</code>
+          <td>apply the <code>\s → even (length s)</code> function to the string&nbsp;<code>"hand"</code>
+      </tbody>
+    </table>
 
     <p>
       Evaluation of a λ-abstraction is called <em>β-reduction</em> (beta
       reduction), and it is performed by <em>substitution</em>. Each occurrence
       of the variable in the function body is replaced by the argument:
-      <table>
-        <tbody>
-          <tr>
-            <td>
-            <td><code>(\x → pred (pred x)) 13</code>
-            <td>
-          <tr>
-            <td>=
-            <td><code>pred (pred 13)</code>
-            <td>β-reduction (<code>x = 13</code>)
-          <tr>
-            <td>=
-            <td><code>pred 12</code>
-            <td>δ-reduction of <code>pred</code>
-          <tr>
-            <td>=
-            <td><code>11</code>
-            <td>δ-reduction of <code>pred</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+          <td><code>(\x → pred (pred x)) 13</code>
+          <td>
+        <tr>
+          <td>=
+          <td><code>pred (pred 13)</code>
+          <td>β-reduction (<code>x = 13</code>)
+        <tr>
+          <td>=
+          <td><code>pred 12</code>
+          <td>δ-reduction of <code>pred</code>
+        <tr>
+          <td>=
+          <td><code>11</code>
+          <td>δ-reduction of <code>pred</code>
+      </tbody>
+    </table>
 
     <p>
       A notable property is α-equivalence (alpha equivalence), which states that renaming a variable
       does not affect the meaning of an expression. If we use <code>y</code> instead of <code>x</code>,
       the reduction sequence and the result are the same:
-      <table>
-        <tbody>
-          <tr>
-            <td>
-            <td><code>(\y → pred (pred y)) 13</code>
-            <td>
-          <tr>
-            <td>=
-            <td><code>pred (pred 13)</code>
-            <td>β-reduction (<code>y = 13</code>)
-          <tr>
-            <td>=
-            <td><code>pred 12</code>
-            <td>δ-reduction of <code>pred</code>
-          <tr>
-            <td>=
-            <td><code>11</code>
-            <td>δ-reduction of <code>pred</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+          <td><code>(\y → pred (pred y)) 13</code>
+          <td>
+        <tr>
+          <td>=
+          <td><code>pred (pred 13)</code>
+          <td>β-reduction (<code>y = 13</code>)
+        <tr>
+          <td>=
+          <td><code>pred 12</code>
+          <td>δ-reduction of <code>pred</code>
+        <tr>
+          <td>=
+          <td><code>11</code>
+          <td>δ-reduction of <code>pred</code>
+      </tbody>
+    </table>
 
     <p>
       We may also nest λ-abstractions. For example, consider <code>\f → \x → f (f x)</code>:
@@ -359,38 +362,38 @@
 
     <p>
       This term is subject to the same reduction rules:
-      <table>
-        <tbody>
-          <tr>
-            <td>
-            <td><code>(\f → \x → f (f x)) succ</code>
-            <td>
-          <tr>
-            <td>=
-            <td><code>\x → succ (succ x)</code>
-            <td>β-reduction (<code>f = succ</code>)
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+          <td><code>(\f → \x → f (f x)) succ</code>
+          <td>
+        <tr>
+          <td>=
+          <td><code>\x → succ (succ x)</code>
+          <td>β-reduction (<code>f = succ</code>)
+      </tbody>
+    </table>
 
     <p>
       We applied it to <code>succ</code> and evaluation resulted in a function
       that increments its input by <code>2</code>. If we applied it to
       <code>pred</code>, evaluation would result in a function that subtracts
       <code>2</code> from its input:
-      <table>
-        <tbody>
-          <tr>
-            <td>
-            <td><code>(\f → \x → f (f x)) pred</code>
-            <td>
-          <tr>
-            <td>=
-            <td><code>\x → pred (pred x)</code>
-            <td>β-reduction (<code>f = pred</code>)
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+          <td><code>(\f → \x → f (f x)) pred</code>
+          <td>
+        <tr>
+          <td>=
+          <td><code>\x → pred (pred x)</code>
+          <td>β-reduction (<code>f = pred</code>)
+      </tbody>
+    </table>
 
     <p>
       This example demonstrates the first-class nature of functions
@@ -407,15 +410,16 @@
 
     <p>
       Therefore, we assign <code>\f → \x → f (f x)</code> the following type:
-      <table>
-        <tbody>
-          <tr>
-            <td><code>\f → \x → f (f x)</code>
-            <td><code>::</code>
-            <td><code>(Integer → Integer) → (Integer → Integer)</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td><code>\f → \x → f (f x)</code>
+          <td><code>::</code>
+          <td><code>(Integer → Integer) → (Integer → Integer)</code>
+      </tbody>
+    </table>
+
     <p>
       Indeed, the input here is some function <code>f :: Integer → Integer</code>,
       and the output is a new function of type <code>Integer → Integer</code>.
@@ -423,33 +427,33 @@
 
     <p>
       Using nested function application, we may supply both <code>f</code> and <code>x</code>:
-      <table>
-        <tbody>
-          <tr>
-            <td>
-            <td><code>((\f → \x → f (f x)) succ) 10</code>
-            <td>
-          <tr>
-            <td>=
-            <td><code>(\x → succ (succ x)) 10</code>
-            <td>β-reduction (<code>f = succ</code>)
-          <tr>
-            <td>=
-            <td><code>succ (succ 10)</code>
-            <td>β-reduction (<code>x = 10</code>)
-          <tr>
-            <td>=
-            <td><code>succ 11</code>
-            <td>δ-reduction of <code>succ</code>
-          <tr>
-            <td>=
-            <td><code>12</code>
-            <td>δ-reduction of <code>succ</code>
-        </tbody>
-      </table>
     </p>
+    <table>
+      <tbody>
+        <tr>
+          <td>
+          <td><code>((\f → \x → f (f x)) succ) 10</code>
+          <td>
+        <tr>
+          <td>=
+          <td><code>(\x → succ (succ x)) 10</code>
+          <td>β-reduction (<code>f = succ</code>)
+        <tr>
+          <td>=
+          <td><code>succ (succ 10)</code>
+          <td>β-reduction (<code>x = 10</code>)
+        <tr>
+          <td>=
+          <td><code>succ 11</code>
+          <td>δ-reduction of <code>succ</code>
+        <tr>
+          <td>=
+          <td><code>12</code>
+          <td>δ-reduction of <code>succ</code>
+      </tbody>
+    </table>
 
-    <big>This draft is unfinished.<big>
+    <p class="disclaimer">This draft is unfinished.</big>
 
   </body>
 </html>
