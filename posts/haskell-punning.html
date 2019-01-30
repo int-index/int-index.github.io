@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Term/Type Punning in Haskell</title>
+    <style>
+      body {
+        margin: 40px auto;
+        max-width: 650px;
+        line-height: 1.6;
+        font-size: 18px;
+        padding: 0 10px
+      }
+      .ty {
+        color: #35979E;
+      }
+      .tm {
+        color: #FF7F50;
+      }
+      li {
+        margin-bottom: 0.5em;
+      }
+      code {
+        white-space: nowrap;
+      }
+      code.block {
+        display: block;
+        padding-left: 1em;
+        white-space: pre;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Haskell has two namespaces: one for <strong class="ty">types</strong>,
+      one for <strong class="tm">terms</strong>.
+    </p>
+    <p>
+      Here is a definition of the identity function that uses distinct names
+      for the type variable and the term variable:
+    </p>
+<code class="block">id :: forall <span class="ty">a</span>. <span class="ty">a</span> -&gt; <span class="ty">a</span>
+id = \<span class="tm">x</span> -&gt; <span class="tm">x</span></code>
+    <p>
+      Here is a version that reuses the same name for both variables:
+    </p>
+<code class="block">id :: forall <span class="ty">a</span>. <span class="ty">a</span> -&gt; <span class="ty">a</span>
+id = \<span class="tm">a</span> -&gt; <span class="tm">a</span></code>
+    <p>
+      The reason we can give two variables the same name is that each lives in
+      its own namespace. There is no shadowing here.
+    </p>
+    <p>
+      A similar situation arises when it comes to constructors. Here is the unit type that
+      uses distinct names for the type constructor and the data constructor:
+    </p>
+<code class="block">data <span class="ty">Unit</span> = <span class="tm">U</span></code>
+    <p>
+      Here is a version that reuses the same name for both constructors:
+    </p>
+<code class="block">data <span class="ty">Unit</span> = <span class="tm">Unit</span></code>
+    <p>
+      Haskell uses this style of punning in its standard library and built-in types:
+    </p>
+<code class="block">data <span class="ty">[a]</span> = <span class="tm">[]</span> | <span class="ty">a</span> <span class="tm">:</span> <span class="ty">[a]</span>
+data <span class="ty">(a, b)</span> = <span class="tm">(</span><span class="ty">a</span><span class="tm">,</span> <span class="ty">b</span><span class="tm">)</span>
+data <span class="ty">()</span> = <span class="tm">()</span>
+data <span class="ty">Proxy a</span> = <span class="tm">Proxy</span>
+newtype <span class="ty">Identity a</span> = <span class="tm">Identity</span> <span class="ty">a</span></code>
+    <p>
+      You might find it elegant or convenient, but it has caused me nothing but pain for several reasons:
+    </p>
+    <ul>
+      <li>
+        Teaching novice programmers requires a thorough explanation of the
+        difference between the square brackets in <code class="ty">[Int]</code>
+        and <code class="tm">[5]</code>. For someone new to programming, the
+        last thing they need is having to distinguish between the meaning of
+        <code class="ty">(a,b)</code> and <code class="tm">(a,b)</code> depending on whether the
+        thing is to the left or to the right of <code>::</code>!
+      </li>
+      <li>
+        Communicating with fellow Haskellers, sometimes I have to clarify if I
+        mean <code class="ty">Proxy</code> the type constructor or <code class="tm">Proxy</code> the
+        data constructor, same goes for <code>Identity</code> and other types.
+        In this post I employed color to convey this information (<span class="ty">blue</span> for types, <span class="tm">orange</span> for terms).
+      </li>
+      <li>Type-level programming that uses <code>-XDataKinds</code>
+        requires ticks to disambiguate the namespace, for example <code
+        class="ty">[]</code> vs <code class="ty">'[]</code>. This is both
+        unpleasant to read and confusing to many a syntax highlighter.
+      </li>
+      <li>Development of future extensions is hindered by this design. For example,
+        the ticks of <code>-XDataKinds</code> are in conflict with Template Haskell
+        syntax for identifier quotation, which is bad news for type-level
+        Template Haskell. There is no way to refer to a type constructor
+        in terms, which is bad news for Dependent Haskell.
+      </li>
+    </ul>
+
+    <p>
+      Using distinct names for type constructors and data constructors is not that difficult:
+    </p>
+<code class="block">data <span class="ty">List a</span> = <span class="tm">[]</span> | <span class="ty">a</span> <span class="tm">:</span> <span class="ty">[a]</span>
+data <span class="ty">Pair a b</span> = <span class="tm">(</span><span class="ty">a</span><span class="tm">,</span> <span class="ty">b</span><span class="tm">)</span>
+data <span class="ty">Unit</span> = <span class="tm">()</span>
+data <span class="ty">Proxy a</span> = <span class="tm">P</span>
+newtype <span class="ty">Identity a</span> = <span class="tm">Id</span> <span class="ty">a</span></code>
+    <p>
+      However, it is probably too late to consider this.
+    </p>
+    <p>
+      We would be better of if Haskell did not have this style of punning in
+      the first place. Designers of new programming languages, my plea to you:
+      learn from this mistake and resist the temptation of meaningless overloading!
+    </p>
+  </body>
+</html>
