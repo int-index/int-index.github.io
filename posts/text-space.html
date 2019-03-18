@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Use of Space in Text Editors</title>
+    <style>
+      body {
+        margin: 40px auto;
+        max-width: 650px;
+        line-height: 1.6;
+        font-size: 18px;
+        padding: 0 10px
+      }
+      .kw {
+        color: #35979E;
+      }
+      .subexpr {
+        display: inline-block;
+        outline: 1px solid gray;
+        padding: 0 0.6em;
+      }
+      code {
+        white-space: nowrap;
+      }
+      code.block {
+        display: block;
+        padding-left: 1em;
+        white-space: pre;
+      }
+      code.flexblock {
+        display: flex;
+        padding-left: 1em;
+        white-space: pre;
+        align-items: baseline;
+      }
+      code.flexblock > span {
+        margin-right: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+      Using text to represent and edit code hinders efficient use of space. The
+      lines-of-characters paradigm makes it easy to write and edit single-line
+      expressions:
+    </p>
+<code class="block"><span class="kw">if</span> p x <span class="kw">then</span> 1 <span class="kw">else</span> 0</code>
+    <p>
+      Multi-line code is trickier because one needs to maintain indentation and alignment:
+    </p>
+<code class="block"><span class="kw">if</span> p x <span class="kw">then</span> (<span class="kw">do</span> eatBreakfast
+                writeCode
+                goToSleep)
+       <span class="kw">else</span> (<span class="kw">do</span> skipBreakfast
+                launchMissiles)
+</code>
+    <p>
+      Combined use of horizontal and vertical layout is not feasible at all:
+    </p>
+<code class="flexblock">
+<span class="kw">if</span>
+<span>p x</span>
+<span class="kw">then</span>
+<span class="subexpr"><span class="kw">do</span> eatBreakfast
+   writeCode
+   goToSleep</span>
+<span class="kw">else</span>
+<span class="subexpr"><span class="kw">do</span> skipBreakfast
+   launchMissiles</span>
+</code>
+    <p>
+      Structure editors can easily support this sort of layout, which becomes more
+      important for highly nested expressions.
+    </p>
+  </body>
+</html>
