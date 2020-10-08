@@ -12,6 +12,9 @@
   h2, .metavar {
     font-variant: small-caps;
   }
+  section {
+    page-break-after: always;
+  }
   table {
     border-collapse: collapse;
     margin: 1em;
@@ -42,6 +45,7 @@
   </head>
   <body>
     <h1>Kasus von Artikeln</h1>
+    <section>
     <div class="h"> <h2>Nominativ</h2> <p>Wer? Was?</p> </div>
     <table>
       <tr> <td><td>Maskulin<td>Maskulin<sup>†</sup><td>Neutrum<td>Feminin<td>Plural</tr>
@@ -59,7 +63,9 @@
       <tr> <td>    ihr <td>  euer Hund <td>   euer Bär <td>  euer Pferd <td>  eure Katze <td>  eure Tiere </tr>
     </table>
     <span class="example">Dies ist/sind <span class="metavar">Nom</span>.</span>
+    </section>
 
+    <section>
     <div class="h"> <h2>Akkusativ</h2> <p>Wenn? Was? Wohin?</p> </div>
     <table>
       <tr> <td><td>Maskulin<td>Maskulin<sup>†</sup><td>Neutrum<td>Feminin<td>Plural</tr>
@@ -77,7 +83,9 @@
       <tr> <td>   euch <td>  euren Hund <td>  euren Bären <td>  euer Pferd <td>  eure Katze <td>  eure Tiere </tr>
     </table>
     <span class="example">Ich sehe <span class="metavar">Akk</span>.</span>
+    </section>
 
+    <section>
     <div class="h"> <h2>Dativ</h2> <p>Wem? Wo? (mit, nach, zu, von, bei)</p> </div>
     <table>
       <tr> <td><td>Maskulin<td>Maskulin<sup>†</sup><td>Neutrum<td>Feminin<td>Plural</tr>
@@ -95,5 +103,6 @@
       <tr> <td>     euch <td>  eurem Hund <td>  eurem Bären <td>  eurem Pferd <td>  eurer Katze <td>  euren Tieren </tr>
     </table>
     <span class="example">Ich gehe mit/zu <span class="metavar">Dat</span>.</span>
+    </section>
   </body>
 </html>
