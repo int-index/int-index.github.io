@@ -29,10 +29,12 @@
   }
   .entries {
     display: grid;
-    grid-template-columns: 400px 400px;
+    grid-template-columns: repeat(auto-fit, 400px);
     grid-column-gap: 30px;
     grid-row-gap: 50px;
     justify-content: center;
+    max-width: 1333px;
+    margin: auto;
   }
   .entry {
     border: 1px solid #33313f;
